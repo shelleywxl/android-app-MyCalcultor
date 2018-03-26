@@ -39,32 +39,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         String num1 = editText1.getText().toString();
         String num2 = editText2.getText().toString();
+
         switch(view.getId()){
             case R.id.buttonAdd:
-                float addition = Float.parseFloat(num1) + Float.parseFloat(num2);
-                //textViewResult.setText(String.valueOf(addition));
-                textViewResult.setText(String.format("%.2f", addition));
-                break;
-            case R.id.buttonSub:
-                float subtraction = Float.parseFloat(num1) - Float.parseFloat(num2);
-                //textViewResult.setText(String.valueOf(subtraction));
-                textViewResult.setText(String.format("%.2f", subtraction));
-                break;
-            case R.id.buttonMul:
-                float multiply = Float.parseFloat(num1) * Float.parseFloat(num2);
-                //textViewResult.setText(String.valueOf(multiply));
-                textViewResult.setText(String.format("%.2f", multiply));
-                break;
-            case R.id.buttonDiv:
-                try {
-                    float division = Float.parseFloat(num1) / Float.parseFloat(num2);
-                    //textViewResult.setText(String.valueOf(division));
-                    textViewResult.setText(String.format("%.2f", division));
-                }catch(Exception e){
-                    textViewResult.setText("Error! Cannot divide.");
+                if (num1==null || num1.trim().equals("") || num2==null || num2.trim().equals("")) {
+                    textViewResult.setText("Error! Need two numbers to do operation.");
+                } else {
+                    float addition = Float.parseFloat(num1) + Float.parseFloat(num2);
+                    //textViewResult.setText(String.valueOf(addition));
+                    textViewResult.setText(String.format("%.2f", addition));
                 }
-                //return "Infinity" as a float value. If the data type is integer, it will return error.
                 break;
+
+            case R.id.buttonSub:
+                if (num1.length() == 0 || num2.length() == 0) {
+                    textViewResult.setText("Error! Need two numbers to do operation.");
+                } else {
+                    float subtraction = Float.parseFloat(num1) - Float.parseFloat(num2);
+                    //textViewResult.setText(String.valueOf(subtraction));
+                    textViewResult.setText(String.format("%.2f", subtraction));
+                }
+                break;
+
+            case R.id.buttonMul:
+                if (num1.length() == 0 || num2.length() == 0) {
+                    textViewResult.setText("Error! Need two numbers to do operation.");
+                } else {
+                    float multiply = Float.parseFloat(num1) * Float.parseFloat(num2);
+                    //textViewResult.setText(String.valueOf(multiply));
+                    textViewResult.setText(String.format("%.2f", multiply));
+                }
+                break;
+
+            case R.id.buttonDiv:
+                if (num1.length() == 0 || num2.length() == 0) {
+                    textViewResult.setText("Error! Need two numbers to do operation.");
+                } else { //return "Infinity" as a float value. If the data type is integer, it will return error.
+                    try {
+                        float division = Float.parseFloat(num1) / Float.parseFloat(num2);
+                        //textViewResult.setText(String.valueOf(division));
+                        textViewResult.setText(String.format("%.2f", division));
+                    } catch (Exception e) {
+                        textViewResult.setText("Error! Cannot divide.");
+                    }
+                }
+                break;
+
         }
     }
 }
